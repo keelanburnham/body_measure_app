@@ -1,0 +1,5 @@
+- [ ] Model
+  - [x] Make a list of all the data to collect
+  - [ ] Create the model
+- [ ] View
+- [ ] Controller
