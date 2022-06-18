@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 
-class RootFrame(ttk.Frame):
+class InputFrame(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
         options = {'padx': 5, 'pady': 5}
@@ -22,11 +22,6 @@ class RootFrame(ttk.Frame):
         self.controller = None
 
     def set_controller(self, controller):
-        """
-        Set view's controller
-        :param controller:
-        :return:
-        """
         self.controller = controller
 
     def save_button_clicked(self):

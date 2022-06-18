@@ -1,7 +1,7 @@
 import tkinter as tk
 from controller import Controller
 from model import Model
-from view import RootFrame
+from view import InputFrame
 
 
 class App(tk.Tk):
@@ -23,8 +23,8 @@ class App(tk.Tk):
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=3)
 
-        model = Model('123.4')
-        view = RootFrame(self)
+        model = Model('123')
+        view = InputFrame(self)
         view.grid(padx=10, pady=10, sticky=tk.NSEW)
         controller = Controller(model, view)
         view.set_controller(controller)

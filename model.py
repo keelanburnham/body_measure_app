@@ -1,4 +1,6 @@
+from contextlib import closing
 import re as regex
+from database import connect_to_db
 
 
 class Model:
@@ -11,21 +13,18 @@ class Model:
 
     @weight.setter
     def weight(self, value):
-        """
-        Validate weight
-        :param value:
-        :return: 
-        """
-        pattern = r'^\d*[.,]?\d*$'
+        pattern = r'^\d*[.]?\d*$'
         if regex.fullmatch(pattern, value):
             self.__weight = value
         else:
             raise ValueError(f'Invalid entry!')
 
     def save(self):
-        """
-        Save the weight to database
-        :return:
-        """
-        with open("data.txt", "a") as file:
-            file.write(self.weight + '\n')
+        with closing(connect_to_db('measurements')) as connection:
+            with closing(connection.cursor()) as cursor:
+                try:
+                    cursor.execute(
+                        f'INSERT INTO body_measurements (weight) VALUES ({self.weight});')
+                    print('Save successful!')
+                except Exception as error:
+                    print('Unable to save weight!')
